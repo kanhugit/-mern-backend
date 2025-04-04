@@ -59,10 +59,10 @@ const BackgroundAnimation: React.FC = () => {
     let particles: Particle[] = [];
     const isDark = theme === 'dark';
     
-    // Particle properties based on theme
-    const particleColor = isDark ? 'rgba(255, 255, 255, 0.5)' : 'rgba(0, 0, 0, 0.3)';
-    const lineColor = isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)';
-    const particleCount = 50;
+    // Particle properties based on theme - increased opacity for better visibility
+    const particleColor = isDark ? 'rgba(255, 255, 255, 0.7)' : 'rgba(0, 0, 0, 0.5)';
+    const lineColor = isDark ? 'rgba(255, 255, 255, 0.2)' : 'rgba(0, 0, 0, 0.2)';
+    const particleCount = 80; // Increased number of particles
     
     // Resize canvas to fill window
     const resizeCanvas = () => {
@@ -77,13 +77,17 @@ const BackgroundAnimation: React.FC = () => {
     // Initialize particles
     function initParticles() {
       particles = [];
-      for (let i = 0; i < particleCount; i++) {
-        particles.push(new Particle(canvas.width, canvas.height));
+      if (canvas) {
+        for (let i = 0; i < particleCount; i++) {
+          particles.push(new Particle(canvas.width, canvas.height));
+        }
       }
     }
     
     // Draw connections between particles
     function drawConnections() {
+      if (!ctx) return;
+      
       for (let i = 0; i < particles.length; i++) {
         for (let j = i + 1; j < particles.length; j++) {
           const dx = particles[i].x - particles[j].x;
@@ -104,6 +108,8 @@ const BackgroundAnimation: React.FC = () => {
     
     // Animation loop
     function animate() {
+      if (!ctx || !canvas) return;
+      
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       
       for (let i = 0; i < particles.length; i++) {
