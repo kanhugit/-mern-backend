@@ -1,5 +1,5 @@
 import React from 'react';
-import { Github, Linkedin, Twitter, Heart } from 'lucide-react';
+import { Github, Linkedin, Heart } from 'lucide-react';
 import { personalInfo } from '@/data/portfolioData';
 
 const Footer: React.FC = () => {
@@ -42,15 +42,6 @@ const Footer: React.FC = () => {
                 aria-label="LinkedIn"
               >
                 <Linkedin size={20} />
-              </a>
-              <a 
-                href={personalInfo.socialLinks.twitter} 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-primary transition-colors"
-                aria-label="Twitter"
-              >
-                <Twitter size={20} />
               </a>
             </div>
           </div>

@@ -53,41 +53,70 @@ const About: React.FC = () => {
             
             <div className="space-y-6">
               <p className="text-muted-foreground">
-                I'm a <span className="font-medium text-foreground">Full Stack Web Developer</span> building robust and user-friendly web applications that solve real-world problems. Check out some of my work in the Projects section.
+                I'm a <span className="font-medium text-foreground">{personalInfo.title}</span> passionate about building robust and user-friendly applications that solve real-world problems. Check out some of my work in the Projects section.
               </p>
               
               <p className="text-muted-foreground">
-                I also like sharing content related to the stuff that I have learned over the years in web development so it can help other people of the dev community.
+                {personalInfo.bio}
               </p>
               
-              <p className="text-muted-foreground">
-                I'm open to job opportunities where I can contribute, learn and grow. If you have a good opportunity that matches my skills then don't hesitate to contact me.
-              </p>
-              
-              <div className="space-y-3 pt-2">
-                <div className="flex items-center gap-3">
-                  <MapPin className="text-primary h-5 w-5" />
-                  <span>{personalInfo.location}</span>
+              <div className="space-y-3 pt-2 mt-6">
+                <h4 className="text-lg font-semibold mb-2">Personal Information</h4>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  <div className="flex items-center gap-3">
+                    <span className="font-medium">Date of Birth:</span>
+                    <span>{personalInfo.personalDetails.dateOfBirth}</span>
+                  </div>
+                  
+                  <div className="flex items-center gap-3">
+                    <span className="font-medium">Father's Name:</span>
+                    <span>{personalInfo.personalDetails.fatherName}</span>
+                  </div>
+                  
+                  <div className="flex items-center gap-3">
+                    <span className="font-medium">Nationality:</span>
+                    <span>{personalInfo.personalDetails.nationality}</span>
+                  </div>
+                  
+                  <div className="flex items-center gap-3">
+                    <span className="font-medium">Marital Status:</span>
+                    <span>{personalInfo.personalDetails.maritalStatus}</span>
+                  </div>
+                  
+                  <div className="flex items-center gap-3">
+                    <span className="font-medium">Languages:</span>
+                    <span>{personalInfo.personalDetails.languages.join(", ")}</span>
+                  </div>
                 </div>
                 
-                <div className="flex items-center gap-3">
-                  <Mail className="text-primary h-5 w-5" />
-                  <a 
-                    href={`mailto:${personalInfo.email}`} 
-                    className="hover:text-primary transition-colors"
-                  >
-                    {personalInfo.email}
-                  </a>
-                </div>
-                
-                <div className="flex items-center gap-3">
-                  <Phone className="text-primary h-5 w-5" />
-                  <a 
-                    href={`tel:${personalInfo.phone}`} 
-                    className="hover:text-primary transition-colors"
-                  >
-                    {personalInfo.phone}
-                  </a>
+                <div className="space-y-3 pt-4">
+                  <h4 className="text-lg font-semibold mb-2">Contact Information</h4>
+                  
+                  <div className="flex items-center gap-3">
+                    <MapPin className="text-primary h-5 w-5" />
+                    <span>{personalInfo.location}</span>
+                  </div>
+                  
+                  <div className="flex items-center gap-3">
+                    <Mail className="text-primary h-5 w-5" />
+                    <a 
+                      href={`mailto:${personalInfo.email}`} 
+                      className="hover:text-primary transition-colors"
+                    >
+                      {personalInfo.email}
+                    </a>
+                  </div>
+                  
+                  <div className="flex items-center gap-3">
+                    <Phone className="text-primary h-5 w-5" />
+                    <a 
+                      href={`tel:${personalInfo.phone}`} 
+                      className="hover:text-primary transition-colors"
+                    >
+                      {personalInfo.phone}
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>

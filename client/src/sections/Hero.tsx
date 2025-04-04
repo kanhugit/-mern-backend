@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { fadeIn, staggerContainer, textVariant } from '@/lib/animations';
 import { personalInfo } from '@/data/portfolioData';
-import { ChevronDown, Github, Linkedin, Twitter } from 'lucide-react';
+import { ChevronDown, Github, Linkedin } from 'lucide-react';
 import { TypeAnimation } from 'react-type-animation';
 import { cn } from '@/lib/utils';
 import { useTheme } from '@/lib/ThemeContext';
@@ -112,21 +112,10 @@ const Hero: React.FC = () => {
               >
                 <Linkedin size={24} />
               </a>
-              <a 
-                href={personalInfo.socialLinks.twitter} 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className={cn(
-                  "hover:text-primary transition-colors",
-                  isDark ? "text-gray-400" : "text-gray-500"
-                )}
-              >
-                <Twitter size={24} />
-              </a>
             </motion.div>
           </motion.div>
           
-          {/* Image or illustration */}
+          {/* Profile image */}
           <motion.div 
             variants={fadeIn('left')} 
             className="hidden lg:flex justify-center items-center"
@@ -136,12 +125,11 @@ const Hero: React.FC = () => {
               "border-4 border-primary",
               "bg-gradient-to-br from-primary/10 to-purple-500/10"
             )}>
-              {/* Will be replaced with an actual profile image */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <span className="text-7xl font-bold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">
-                  {personalInfo.firstName.charAt(0)}{personalInfo.lastName.charAt(0)}
-                </span>
-              </div>
+              <img 
+                src={personalInfo.profileImage} 
+                alt={`${personalInfo.firstName} ${personalInfo.lastName}`}
+                className="absolute inset-0 w-full h-full object-cover"
+              />
             </div>
           </motion.div>
         </motion.div>
