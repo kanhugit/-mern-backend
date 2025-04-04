@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -33,6 +33,27 @@
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
   }
+  
+  /* Enhanced link hover effects */
+  a {
+    position: relative;
+    transition: all 0.3s ease;
+  }
+  
+  a.fancy-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -2px;
+    left: 0;
+    background: linear-gradient(to right, hsl(var(--primary)), rgba(139, 92, 246, 0.5));
+    transition: width 0.3s ease;
+  }
+  
+  a.fancy-link:hover::after {
+    width: 100%;
+  }
 }
 
 /* Custom utilities */
@@ -47,6 +68,12 @@
   
   .skill-circle {
     @apply flex items-center justify-center rounded-full bg-primary/10 hover:bg-primary/20 transition-all duration-300 border-2 border-primary/30 p-3;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+  
+  .skill-circle:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
   }
   
   /* Responsive improvements */
@@ -61,18 +88,65 @@
   /* Card styling */
   .card-gradient {
     background: var(--card-gradient);
-    @apply shadow-lg hover:shadow-xl transition-all duration-300;
+    @apply shadow-lg transition-all duration-300;
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+                box-shadow 0.5s ease;
+  }
+  
+  .card-gradient:hover {
+    transform: translateY(-5px);
+    @apply shadow-xl;
   }
   
   /* Button styling */
   .gradient-button {
     background: var(--button-gradient);
-    @apply text-white font-medium py-2 px-6 rounded-md shadow-md hover:shadow-lg transition-all duration-300;
+    @apply text-white font-medium py-2 px-6 rounded-md shadow-md transition-all duration-300;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .gradient-button::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.7s ease;
+  }
+  
+  .gradient-button:hover {
+    @apply shadow-lg;
+    transform: translateY(-2px);
+  }
+  
+  .gradient-button:hover::after {
+    left: 100%;
   }
   
   /* Section styling */
   .alt-section {
     background-color: var(--section-bg);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  /* Add subtle background pattern to sections */
+  .alt-section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+      radial-gradient(circle at 20% 30%, rgba(37, 99, 235, 0.05) 0%, transparent 10%),
+      radial-gradient(circle at 80% 70%, rgba(139, 92, 246, 0.05) 0%, transparent 10%);
+    background-size: 60px 60px;
+    opacity: 0.5;
+    pointer-events: none;
   }
   
   /* Education section styling */
@@ -89,6 +163,11 @@
   .profile-image-container {
     position: relative;
     box-shadow: 0 0 30px rgba(37, 99, 235, 0.2);
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+  
+  .profile-image-container:hover {
+    transform: scale(1.02);
   }
   
   /* Animation utilities */
@@ -117,6 +196,37 @@
     50% { opacity: 1; }
   }
   
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+  
+  @keyframes gradient-shift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  
+  @keyframes slide-in-left {
+    0% { transform: translateX(-100%); opacity: 0; }
+    100% { transform: translateX(0); opacity: 1; }
+  }
+  
+  @keyframes slide-in-right {
+    0% { transform: translateX(100%); opacity: 0; }
+    100% { transform: translateX(0); opacity: 1; }
+  }
+  
+  @keyframes fade-in-up {
+    0% { transform: translateY(20px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+  }
+  
+  @keyframes bounce-soft {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+  
   .animate-float-slow {
     animation: float-slow 8s ease-in-out infinite;
   }
@@ -135,6 +245,38 @@
   
   .animate-pulse-slow {
     animation: pulse-slow 4s ease-in-out infinite;
+  }
+  
+  .animate-shimmer {
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+  }
+  
+  .animate-gradient-shift {
+    background-size: 200% 200%;
+    animation: gradient-shift 5s ease infinite;
+  }
+  
+  .animate-slide-in-left {
+    animation: slide-in-left 0.5s ease-out forwards;
+  }
+  
+  .animate-slide-in-right {
+    animation: slide-in-right 0.5s ease-out forwards;
+  }
+  
+  .animate-fade-in-up {
+    animation: fade-in-up 0.6s ease-out forwards;
+  }
+  
+  .animate-bounce-soft {
+    animation: bounce-soft 2s ease-in-out infinite;
+  }
+  
+  /* Custom backgrounds */
+  .bg-gradient-radial {
+    background-image: radial-gradient(var(--tw-gradient-stops));
   }
   
   /* Personal details styling */
@@ -158,5 +300,29 @@
   .detail-item:hover .detail-label::after {
     transform: scaleX(1);
     transform-origin: left;
+  }
+  
+  /* Parallax effect */
+  .parallax {
+    transform: translateZ(0);
+    transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  
+  .parallax-slow {
+    transform: translateZ(-100px) scale(1.5);
+  }
+  
+  .parallax-medium {
+    transform: translateZ(-50px) scale(1.25);
+  }
+  
+  .parallax-fast {
+    transform: translateZ(-25px) scale(1.15);
+  }
+  
+  /* Badge effects */
+  .badge-glow {
+    animation: pulse-slow 3s infinite;
+    box-shadow: 0 0 10px rgba(var(--primary-rgb), 0.5);
   }
 }
