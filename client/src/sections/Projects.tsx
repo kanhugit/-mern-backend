@@ -15,7 +15,7 @@ const Projects: React.FC = () => {
   const { theme } = useTheme();
   const isDark = theme === 'dark';
   const [activeCategory, setActiveCategory] = useState<string>('All');
-  const [selectedProject, setSelectedProject] = useState<any>(null);
+  const [selectedProject, setSelectedProject] = useState<typeof projects[0] | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [activeTab, setActiveTab] = useState('code');
   
@@ -24,7 +24,7 @@ const Projects: React.FC = () => {
     ? projects 
     : projects.filter(project => project.category === activeCategory);
 
-  const openProjectDetails = (project: any) => {
+  const openProjectDetails = (project: typeof projects[0]) => {
     setSelectedProject(project);
     setIsDialogOpen(true);
   };
@@ -234,7 +234,7 @@ const Projects: React.FC = () => {
                 {selectedProject.codeSnippets && selectedProject.codeSnippets.length > 0 ? (
                   <div className="space-y-6">
                     <div className="grid grid-cols-3 gap-2 mb-4 border-b pb-3">
-                      {selectedProject.codeSnippets.map((snippet, idx) => (
+                      {selectedProject.codeSnippets.map((snippet: { title: string; language: string; code: string }, idx: number) => (
                         <Button 
                           key={idx} 
                           variant={idx === 0 ? "default" : "outline"}
@@ -290,7 +290,7 @@ const Projects: React.FC = () => {
                         Key Features
                       </h3>
                       <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                        {selectedProject.demoDetails.features.map((feature, idx) => (
+                        {selectedProject.demoDetails.features.map((feature: string, idx: number) => (
                           <li key={idx} className="flex items-start gap-2">
                             <div className="h-5 w-5 flex items-center justify-center mt-0.5">
                               <div className="h-2 w-2 rounded-full bg-primary"></div>
@@ -307,7 +307,7 @@ const Projects: React.FC = () => {
                         Screenshots
                       </h3>
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        {selectedProject.demoDetails.screenshots.map((screenshot, idx) => (
+                        {selectedProject.demoDetails.screenshots.map((screenshot: { title: string; description: string }, idx: number) => (
                           <div key={idx} className="border rounded-md overflow-hidden">
                             <div className="bg-primary/10 p-2 font-medium text-sm">
                               {screenshot.title}
@@ -328,7 +328,7 @@ const Projects: React.FC = () => {
                         Technologies Used
                       </h3>
                       <div className="flex flex-wrap gap-2">
-                        {selectedProject.technologies.map((tech, idx) => (
+                        {selectedProject.technologies.map((tech: string, idx: number) => (
                           <Badge 
                             key={idx} 
                             variant="outline"
