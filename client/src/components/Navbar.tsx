@@ -50,7 +50,14 @@ const Navbar: React.FC = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <a href="#home" className="flex items-center gap-2">
+          <a 
+            href="#home" 
+            className="flex items-center gap-2"
+            onClick={(e) => {
+              e.preventDefault();
+              document.getElementById('home')?.scrollIntoView({ behavior: 'smooth' });
+            }}
+          >
             <motion.div 
               whileHover={{ scale: 1.05 }}
               className={cn(
@@ -68,6 +75,14 @@ const Navbar: React.FC = () => {
               <a
                 key={link.name}
                 href={link.href}
+                onClick={(e) => {
+                  e.preventDefault();
+                  const targetId = link.href.substring(1);
+                  const targetElement = document.getElementById(targetId);
+                  if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }}
                 className={cn(
                   'py-2 px-3 rounded-md text-sm font-medium transition-colors duration-300 nav-link',
                   'hover:bg-accent hover:text-accent-foreground'
@@ -152,7 +167,15 @@ const Navbar: React.FC = () => {
                 <a
                   key={link.name}
                   href={link.href}
-                  onClick={handleLinkClick}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleLinkClick();
+                    const targetId = link.href.substring(1);
+                    const targetElement = document.getElementById(targetId);
+                    if (targetElement) {
+                      targetElement.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  }}
                   className={cn(
                     'py-3 px-4 rounded-md text-base font-medium transition-colors duration-300 nav-link',
                     'hover:bg-accent hover:text-accent-foreground'

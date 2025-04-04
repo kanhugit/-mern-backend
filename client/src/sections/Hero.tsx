@@ -22,7 +22,7 @@ const Hero: React.FC = () => {
           variants={staggerContainer}
           initial="hidden"
           animate="visible"
-          className="grid lg:grid-cols-2 gap-10 items-center"
+          className="flex flex-col lg:grid lg:grid-cols-2 gap-6 lg:gap-10 items-center"
         >
           {/* Text content */}
           <motion.div 
@@ -78,10 +78,22 @@ const Hero: React.FC = () => {
               variants={textVariant(0.5)} 
               className="flex gap-4"
             >
-              <Button size="lg" className="bg-gradient-to-r from-primary to-purple-600 hover:from-primary hover:to-purple-500">
+              <Button 
+                size="lg" 
+                className="bg-gradient-to-r from-primary to-purple-600 hover:from-primary hover:to-purple-500"
+                onClick={() => {
+                  document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
+                }}
+              >
                 View Projects
               </Button>
-              <Button variant="outline" size="lg">
+              <Button 
+                variant="outline" 
+                size="lg"
+                onClick={() => {
+                  document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+                }}
+              >
                 Contact Me
               </Button>
             </motion.div>
@@ -118,10 +130,10 @@ const Hero: React.FC = () => {
           {/* Profile image with animated background */}
           <motion.div 
             variants={fadeIn('left')} 
-            className="hidden lg:flex justify-center items-center"
+            className="flex justify-center items-center mt-8 lg:mt-0"
           >
             <div className={cn(
-              "relative w-80 h-80 rounded-full overflow-hidden profile-image-container",
+              "relative w-60 h-60 md:w-72 md:h-72 lg:w-80 lg:h-80 rounded-full overflow-hidden profile-image-container",
               "border-4 border-primary",
             )}>
               {/* Animated background circles */}
@@ -150,6 +162,10 @@ const Hero: React.FC = () => {
           initial="hidden"
           animate="visible"
           className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+          onClick={() => {
+            document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
+          }}
+          style={{ cursor: 'pointer' }}
         >
           <span className="text-sm font-medium text-muted-foreground">Scroll Down</span>
           <motion.div
