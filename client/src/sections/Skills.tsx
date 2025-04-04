@@ -5,6 +5,7 @@ import { fadeIn, staggerContainer, textVariant } from '@/lib/animations';
 import { useTheme } from '@/lib/ThemeContext';
 import { cn } from '@/lib/utils';
 import { Badge } from '@/components/ui/badge';
+import GridBackground from '@/components/GridBackground';
 import { FaJava, FaHtml5, FaCss3Alt, FaJs, FaReact, FaBootstrap, FaGithub, FaDocker, FaJira, FaGraduationCap, FaCode } from 'react-icons/fa';
 import { SiSpring, SiHibernate, SiMongodb, SiMysql, SiOracle, SiTypescript, SiPostman, SiSwagger, SiJenkins, SiKubernetes, SiJunit5, SiRedis, SiApachekafka, SiEclipseide } from 'react-icons/si';
 import { TbBrandGit } from 'react-icons/tb';
@@ -52,8 +53,11 @@ const Skills: React.FC = () => {
   );
 
   return (
-    <section id="skills" className="section-padding">
-      <div className="container">
+    <section id="skills" className="section-padding relative overflow-hidden">
+      {/* Grid background */}
+      <GridBackground className="-z-10" dotOpacity={0.3} gridSize={25} />
+      
+      <div className="container relative z-10">
         {/* Section Header */}
         <motion.div
           variants={staggerContainer}

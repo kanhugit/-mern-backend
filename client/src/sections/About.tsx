@@ -1,19 +1,23 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { personalInfo, stats, experience } from '@/data/portfolioData';
+import { personalInfo, stats } from '@/data/portfolioData';
 import { fadeIn, staggerContainer, textVariant } from '@/lib/animations';
 import { MapPin, Mail, Phone } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useTheme } from '@/lib/ThemeContext';
 import { Card, CardContent } from '@/components/ui/card';
+import WaveBackground from '@/components/WaveBackground';
 
 const About: React.FC = () => {
   const { theme } = useTheme();
   const isDark = theme === 'dark';
 
   return (
-    <section id="about" className="py-20">
-      <div className="container mx-auto px-4 lg:px-6">
+    <section id="about" className="py-20 relative overflow-hidden">
+      {/* Wave background */}
+      <WaveBackground className="-z-10" waveOpacity={0.08} />
+      
+      <div className="container mx-auto px-4 lg:px-6 relative z-10">
         {/* Section Header */}
         <motion.div
           variants={staggerContainer}

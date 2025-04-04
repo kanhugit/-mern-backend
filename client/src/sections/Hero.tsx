@@ -7,6 +7,7 @@ import { ChevronDown, Github, Linkedin, Mail, Download, ArrowRight } from 'lucid
 import { TypeAnimation } from 'react-type-animation';
 import { cn } from '@/lib/utils';
 import { useTheme } from '@/lib/ThemeContext';
+import FloatingShapes from '@/components/FloatingShapes';
 
 const Hero: React.FC = () => {
   const { theme } = useTheme();
@@ -33,6 +34,9 @@ const Hero: React.FC = () => {
       <div className="absolute inset-0 -z-20 opacity-20">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/30 via-transparent to-purple-500/30 animate-gradient-shift"></div>
       </div>
+      
+      {/* Floating Shapes Background */}
+      <FloatingShapes className="-z-10" count={10} />
       {/* Animated background particles */}
       <div className="absolute inset-0 pointer-events-none">
         {Array.from({ length: 20 }).map((_, index) => (
