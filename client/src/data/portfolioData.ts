@@ -121,7 +121,7 @@ export const technicalSkills = [
   { category: "Databases", skills: ["Oracle", "MySQL", "MongoDB"] },
   { category: "IDE", skills: ["Eclipse", "VS Code", "STS"] },
   { category: "Operating System", skills: ["Windows"] },
-  { category: "Real Time Tools", skills: ["JIRA", "Maven", "Gradle", "GitHub", "BitBucket", "Log4J", "LogBack", "LogStash", "JUNIT", "Jacocco", "SonarQube", "JMETER", "JENKINS", "Docker", "Kubernetes", "Apache Kafka", "Redis Cache", "POSTMAN", "Swagger"] },
+  { category: "Real Time Tools", skills: ["JIRA", "Maven", "Gradle", "GitHub", "BitBucket", "Log4J", "LogBack", "LogStash", "Putty", "Winscp", "JUNIT", "Jacocco", "SonarQube", "JMETER", "JENKINS", "Docker", "Kubernetes", "Apache Kafka", "Redis Cache", "POSTMAN", "Swagger"] },
 ];
 
 // Other skills
