@@ -7,17 +7,27 @@ import { cn } from '@/lib/utils';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { ExternalLink, Code, ArrowRight } from 'lucide-react';
+import { ExternalLink, Code, ArrowRight, Monitor, Info, X, CheckSquare, List } from 'lucide-react';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter, DialogClose } from '@/components/ui/dialog';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 const Projects: React.FC = () => {
   const { theme } = useTheme();
   const isDark = theme === 'dark';
   const [activeCategory, setActiveCategory] = useState<string>('All');
+  const [selectedProject, setSelectedProject] = useState<any>(null);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [activeTab, setActiveTab] = useState('code');
   
   // Filter projects based on selected category
   const filteredProjects = activeCategory === 'All' 
     ? projects 
     : projects.filter(project => project.category === activeCategory);
+
+  const openProjectDetails = (project: any) => {
+    setSelectedProject(project);
+    setIsDialogOpen(true);
+  };
 
   return (
     <section id="projects" className="py-20 alt-section">
@@ -135,7 +145,7 @@ const Projects: React.FC = () => {
                   </div>
                 </CardContent>
                 
-                <CardFooter className="border-t p-4 flex gap-3">
+                <CardFooter className="border-t p-4 flex gap-3 flex-wrap">
                   <Button 
                     variant="default" 
                     size="sm"
@@ -156,6 +166,15 @@ const Projects: React.FC = () => {
                     <a href={project.codeLink} target="_blank" rel="noopener noreferrer">
                       <Code className="h-4 w-4 mr-2" /> Code
                     </a>
+                  </Button>
+                  
+                  <Button 
+                    variant="secondary" 
+                    size="sm"
+                    className="w-full mt-2"
+                    onClick={() => openProjectDetails(project)}
+                  >
+                    <Info className="h-4 w-4 mr-2" /> View Details
                   </Button>
                 </CardFooter>
               </Card>
@@ -183,6 +202,177 @@ const Projects: React.FC = () => {
           </motion.div>
         )}
       </div>
+
+      {/* Project Details Dialog */}
+      {selectedProject && (
+        <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+          <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+            <DialogHeader>
+              <DialogTitle className="text-2xl flex items-center">
+                <span className="flex-1">{selectedProject.title}</span>
+                <DialogClose className="ml-auto">
+                  <X className="h-4 w-4" />
+                </DialogClose>
+              </DialogTitle>
+              <Badge className="w-fit my-2">{selectedProject.category}</Badge>
+              <DialogDescription className="text-base">
+                {selectedProject.description}
+              </DialogDescription>
+            </DialogHeader>
+
+            <Tabs defaultValue="code" className="mt-4" onValueChange={setActiveTab}>
+              <TabsList className="grid grid-cols-2 mb-4">
+                <TabsTrigger value="code" className="flex items-center gap-2">
+                  <Code className="h-4 w-4" /> Code Examples
+                </TabsTrigger>
+                <TabsTrigger value="demo" className="flex items-center gap-2">
+                  <Monitor className="h-4 w-4" /> Demo Details
+                </TabsTrigger>
+              </TabsList>
+              
+              <TabsContent value="code" className="pt-2">
+                {selectedProject.codeSnippets && selectedProject.codeSnippets.length > 0 ? (
+                  <div className="space-y-6">
+                    <div className="grid grid-cols-3 gap-2 mb-4 border-b pb-3">
+                      {selectedProject.codeSnippets.map((snippet, idx) => (
+                        <Button 
+                          key={idx} 
+                          variant={idx === 0 ? "default" : "outline"}
+                          size="sm"
+                          className="text-xs"
+                          onClick={() => {
+                            // Logic to switch between code snippets could be added here
+                          }}
+                        >
+                          {snippet.title}
+                        </Button>
+                      ))}
+                    </div>
+                    
+                    <div className="rounded-md overflow-hidden">
+                      <div className="bg-primary/10 py-2 px-4 font-medium">
+                        {selectedProject.codeSnippets[0].title} 
+                        <Badge className="ml-2 text-xs">{selectedProject.codeSnippets[0].language}</Badge>
+                      </div>
+                      <pre className="p-4 overflow-x-auto bg-gray-100 dark:bg-gray-900 rounded-b-md">
+                        <code className="text-sm">
+                          {selectedProject.codeSnippets[0].code}
+                        </code>
+                      </pre>
+                    </div>
+                    
+                    <p className="text-sm text-muted-foreground">
+                      This code snippet shows a key part of the {selectedProject.title} project. 
+                      The full source code is available on GitHub.
+                    </p>
+                  </div>
+                ) : (
+                  <div className="text-center p-8">
+                    <Code className="h-16 w-16 mx-auto text-primary/40" />
+                    <p className="mt-4 text-muted-foreground">
+                      No code examples available for this project.
+                    </p>
+                  </div>
+                )}
+              </TabsContent>
+              
+              <TabsContent value="demo" className="pt-2">
+                {selectedProject.demoDetails ? (
+                  <div className="space-y-6">
+                    <h3 className="text-lg font-medium">About the Project</h3>
+                    <p className="text-muted-foreground">
+                      {selectedProject.demoDetails.description}
+                    </p>
+                    
+                    <div>
+                      <h3 className="text-lg font-medium mb-3 flex items-center">
+                        <CheckSquare className="h-5 w-5 mr-2 text-primary" />
+                        Key Features
+                      </h3>
+                      <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                        {selectedProject.demoDetails.features.map((feature, idx) => (
+                          <li key={idx} className="flex items-start gap-2">
+                            <div className="h-5 w-5 flex items-center justify-center mt-0.5">
+                              <div className="h-2 w-2 rounded-full bg-primary"></div>
+                            </div>
+                            <span className="text-sm">{feature}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                    
+                    <div>
+                      <h3 className="text-lg font-medium mb-3 flex items-center">
+                        <Monitor className="h-5 w-5 mr-2 text-primary" />
+                        Screenshots
+                      </h3>
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        {selectedProject.demoDetails.screenshots.map((screenshot, idx) => (
+                          <div key={idx} className="border rounded-md overflow-hidden">
+                            <div className="bg-primary/10 p-2 font-medium text-sm">
+                              {screenshot.title}
+                            </div>
+                            <div className="p-3">
+                              <p className="text-sm text-muted-foreground">
+                                {screenshot.description}
+                              </p>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                    
+                    <div className="bg-primary/5 p-4 rounded-md">
+                      <h3 className="text-lg font-medium mb-2 flex items-center">
+                        <List className="h-5 w-5 mr-2 text-primary" />
+                        Technologies Used
+                      </h3>
+                      <div className="flex flex-wrap gap-2">
+                        {selectedProject.technologies.map((tech, idx) => (
+                          <Badge 
+                            key={idx} 
+                            variant="outline"
+                            className="bg-background"
+                          >
+                            {tech}
+                          </Badge>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="text-center p-8">
+                    <Monitor className="h-16 w-16 mx-auto text-primary/40" />
+                    <p className="mt-4 text-muted-foreground">
+                      No demo details available for this project.
+                    </p>
+                  </div>
+                )}
+              </TabsContent>
+            </Tabs>
+
+            <DialogFooter className="mt-6 flex-col sm:flex-row gap-3">
+              <Button 
+                variant="outline"
+                className="flex-1"
+                asChild
+              >
+                <a href={selectedProject.codeLink} target="_blank" rel="noopener noreferrer">
+                  <Code className="h-4 w-4 mr-2" /> View Source Code
+                </a>
+              </Button>
+              <Button 
+                className="flex-1 gradient-button"
+                asChild
+              >
+                <a href={selectedProject.demoLink} target="_blank" rel="noopener noreferrer">
+                  <ExternalLink className="h-4 w-4 mr-2" /> View Live Demo
+                </a>
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
+      )}
     </section>
   );
 };
