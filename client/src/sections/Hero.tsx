@@ -29,6 +29,10 @@ const Hero: React.FC = () => {
       ref={ref}
       className="min-h-screen flex items-center pt-16 relative overflow-hidden"
     >
+      {/* Animated gradient background */}
+      <div className="absolute inset-0 -z-20 opacity-20">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/30 via-transparent to-purple-500/30 animate-gradient-shift"></div>
+      </div>
       {/* Animated background particles */}
       <div className="absolute inset-0 pointer-events-none">
         {Array.from({ length: 20 }).map((_, index) => (
@@ -117,12 +121,13 @@ const Hero: React.FC = () => {
                   1500,
                   "Backend Developer",
                   1500,
-                  "Mobile App Developer",
+                  "React.js Developer",
                   1500,
                 ]}
                 speed={40}
+                wrapper="span"
                 repeat={Infinity}
-                className="text-accent-foreground bg-gradient-to-r from-primary to-purple-500 bg-clip-text text-transparent"
+                className="text-accent-foreground bg-gradient-to-r from-primary to-purple-500 bg-clip-text text-transparent animate-gradient-shift"
               />
             </motion.div>
             

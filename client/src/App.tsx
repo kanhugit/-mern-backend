@@ -5,6 +5,7 @@ import Home from "@/pages/Home";
 import { ThemeProvider } from "@/lib/ThemeContext";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClient } from "@/lib/queryClient";
+import AIAssistant from "@/components/AIAssistant";
 
 function Router() {
   return (
@@ -20,6 +21,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <ThemeProvider>
         <Router />
+        <AIAssistant />
         <Toaster />
       </ThemeProvider>
     </QueryClientProvider>
