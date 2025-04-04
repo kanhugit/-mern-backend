@@ -1,6 +1,6 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
-import { storage } from "./storage";
+import { Message } from "./mongodb";
 import { insertMessageSchema } from "@shared/schema";
 import { z } from "zod";
 import { fromZodError } from "zod-validation-error";
@@ -12,14 +12,22 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Validate the request body
       const messageData = insertMessageSchema.parse(req.body);
       
-      // Save the message to storage
-      const message = await storage.createMessage(messageData);
+      // Create a new message document using Mongoose model
+      const newMessage = new Message({
+        name: messageData.name,
+        email: messageData.email,
+        subject: messageData.subject,
+        message: messageData.message
+      });
+      
+      // Save the message to MongoDB
+      const savedMessage = await newMessage.save();
       
       // Return the created message
       return res.status(201).json({
         success: true, 
         message: "Message sent successfully!",
-        data: message
+        data: savedMessage
       });
     } catch (error) {
       if (error instanceof z.ZodError) {

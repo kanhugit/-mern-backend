@@ -60,34 +60,17 @@ const About: React.FC = () => {
                 {personalInfo.bio}
               </p>
               
-              <div className="space-y-3 pt-2 mt-6">
-                <h4 className="text-lg font-semibold mb-2">Personal Information</h4>
+              <div className="space-y-3 pt-4 mt-4">
+                <h4 className="text-lg font-semibold mb-2">Professional Focus</h4>
                 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                  <div className="flex items-center gap-3">
-                    <span className="font-medium">Date of Birth:</span>
-                    <span>{personalInfo.personalDetails.dateOfBirth}</span>
-                  </div>
+                <div className="grid grid-cols-1 gap-3">
+                  <p className="text-muted-foreground">
+                    I specialize in developing full-stack web applications using Java technologies and modern JavaScript frameworks. With expertise in both front-end and back-end development, I strive to create efficient, scalable, and user-friendly solutions.
+                  </p>
                   
-                  <div className="flex items-center gap-3">
-                    <span className="font-medium">Father's Name:</span>
-                    <span>{personalInfo.personalDetails.fatherName}</span>
-                  </div>
-                  
-                  <div className="flex items-center gap-3">
-                    <span className="font-medium">Nationality:</span>
-                    <span>{personalInfo.personalDetails.nationality}</span>
-                  </div>
-                  
-                  <div className="flex items-center gap-3">
-                    <span className="font-medium">Marital Status:</span>
-                    <span>{personalInfo.personalDetails.maritalStatus}</span>
-                  </div>
-                  
-                  <div className="flex items-center gap-3">
-                    <span className="font-medium">Languages:</span>
-                    <span>{personalInfo.personalDetails.languages.join(", ")}</span>
-                  </div>
+                  <p className="text-muted-foreground">
+                    My approach combines technical excellence with a deep understanding of business needs to deliver solutions that provide real value to users and stakeholders alike.
+                  </p>
                 </div>
                 
                 <div className="space-y-3 pt-4">

@@ -39,6 +39,12 @@ export const education = [
     startDate: "2024",
     endDate: "2025",
     description: "Training in comprehensive Java Full Stack Development with focus on industry-standard technologies and practices.",
+    achievements: [
+      "Developed multiple full-stack applications using Spring Boot and React",
+      "Built RESTful APIs and microservices architecture projects",
+      "Led team projects and gained experience with CI/CD pipelines",
+      "Received certification in Advanced Java Development"
+    ]
   },
   {
     id: 2,
@@ -48,6 +54,12 @@ export const education = [
     startDate: "2022",
     endDate: "2025",
     description: "Advanced studies in computer applications, software development, and information technology management.",
+    achievements: [
+      "Maintained CGPA of 8.5+ throughout the program",
+      "Completed thesis on 'Modern Web Application Architecture'",
+      "Participated in multiple hackathons and coding competitions",
+      "Served as student representative for department events"
+    ]
   },
   {
     id: 3,
@@ -57,6 +69,12 @@ export const education = [
     startDate: "2018",
     endDate: "2021",
     description: "Fundamental scientific studies with focus on computer-related subjects.",
+    achievements: [
+      "Graduated with First Class distinction",
+      "Developed several academic projects in Python and Java",
+      "Conducted workshops on programming fundamentals",
+      "Active member of the university's computer science club"
+    ]
   },
   {
     id: 4,
@@ -66,6 +84,11 @@ export const education = [
     startDate: "2016",
     endDate: "2018",
     description: "Higher secondary education with science stream.",
+    achievements: [
+      "Secured 85% marks in final examinations",
+      "Participated in various inter-college science competitions",
+      "Selected for regional science talent program"
+    ]
   },
   {
     id: 5,
@@ -75,6 +98,11 @@ export const education = [
     startDate: "2015",
     endDate: "2016",
     description: "Secondary education with strong academic foundation.",
+    achievements: [
+      "Achieved top rank in school with 92% marks",
+      "Received merit scholarship for academic excellence",
+      "Active participant in school's cultural and sports activities"
+    ]
   },
 ];
 

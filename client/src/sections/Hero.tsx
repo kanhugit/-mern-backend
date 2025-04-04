@@ -115,20 +115,30 @@ const Hero: React.FC = () => {
             </motion.div>
           </motion.div>
           
-          {/* Profile image */}
+          {/* Profile image with animated background */}
           <motion.div 
             variants={fadeIn('left')} 
             className="hidden lg:flex justify-center items-center"
           >
             <div className={cn(
-              "relative w-80 h-80 rounded-full overflow-hidden",
+              "relative w-80 h-80 rounded-full overflow-hidden profile-image-container",
               "border-4 border-primary",
-              "bg-gradient-to-br from-primary/10 to-purple-500/10"
             )}>
+              {/* Animated background circles */}
+              <div className="absolute inset-0 -z-10 animate-pulse-slow">
+                <div className="absolute top-5 left-5 w-20 h-20 rounded-full bg-primary/20 animate-float-slow"></div>
+                <div className="absolute bottom-10 right-5 w-12 h-12 rounded-full bg-purple-500/20 animate-float-medium"></div>
+                <div className="absolute top-1/2 right-10 w-16 h-16 rounded-full bg-primary/10 animate-float-fast"></div>
+                <div className="absolute bottom-1/4 left-1/4 w-10 h-10 rounded-full bg-purple-500/15 animate-spin-slow"></div>
+              </div>
+              
+              {/* Radial gradient background */}
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-purple-500/10 to-primary/5 -z-5"></div>
+              
               <img 
                 src={personalInfo.profileImage} 
                 alt={`${personalInfo.firstName} ${personalInfo.lastName}`}
-                className="absolute inset-0 w-full h-full object-cover"
+                className="absolute inset-0 w-full h-full object-cover z-10"
               />
             </div>
           </motion.div>
