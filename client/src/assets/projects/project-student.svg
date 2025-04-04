@@ -1,0 +1,32 @@
+<svg width="600" height="400" viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="studentGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ec4899;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#db2777;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="600" height="400" fill="url(#studentGradient)" />
+  
+  <!-- Graduation Cap -->
+  <polygon points="300,80 380,120 220,120" fill="#0f172a" />
+  <rect x="290" y="120" width="20" height="30" fill="#0f172a" />
+  <polygon points="290,150 310,150 320,170 280,170" fill="#0f172a" />
+  <circle cx="300" cy="95" r="10" fill="#ec4899" />
+  
+  <!-- Book -->
+  <path d="M200,200 L400,200 L400,320 L200,320 C180,320 180,200 200,200" fill="white" stroke="#0f172a" stroke-width="2" />
+  <path d="M200,200 C220,200 220,320 200,320" fill="#f1f5f9" stroke="#0f172a" stroke-width="1" />
+  <path d="M210,230 L390,230" stroke="#cbd5e1" stroke-width="2" />
+  <path d="M210,260 L390,260" stroke="#cbd5e1" stroke-width="2" />
+  <path d="M210,290 L390,290" stroke="#cbd5e1" stroke-width="2" />
+  
+  <!-- Pencil -->
+  <polygon points="430,240 440,230 450,240 440,250" fill="#fef3c7" stroke="#0f172a" stroke-width="1" />
+  <rect x="450" y="240" width="30" height="10" fill="#ec4899" stroke="#0f172a" stroke-width="1" />
+  <polygon points="480,240 480,250 490,245" fill="#0f172a" />
+  
+  <!-- Title -->
+  <text x="300" y="360" fill="white" font-family="Arial, sans-serif" font-size="24" font-weight="bold" text-anchor="middle">STUDENT MANAGEMENT SYSTEM</text>
+</svg>

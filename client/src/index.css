@@ -3,6 +3,13 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --background-gradient: linear-gradient(to right, #f0f9ff, #e0f2fe, #f0f9ff);
+  --card-gradient: linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(240, 249, 255, 0.85));
+  --button-gradient: linear-gradient(to right, #2563eb, #3b82f6);
+  --section-bg: #f8fafc;
+}
+
 @layer base {
   * {
     @apply border-border;
@@ -16,6 +23,10 @@
     @apply font-sans antialiased bg-background text-foreground;
     font-family: 'Poppins', sans-serif;
     overflow-x: hidden;
+  }
+  
+  body:not(.dark) {
+    background: var(--background-gradient);
   }
   
   h1, h2, h3, h4, h5, h6 {
@@ -45,5 +56,22 @@
   
   .responsive-padding {
     @apply px-4 sm:px-6 md:px-8;
+  }
+  
+  /* Card styling */
+  .card-gradient {
+    background: var(--card-gradient);
+    @apply shadow-lg hover:shadow-xl transition-all duration-300;
+  }
+  
+  /* Button styling */
+  .gradient-button {
+    background: var(--button-gradient);
+    @apply text-white font-medium py-2 px-6 rounded-md shadow-md hover:shadow-lg transition-all duration-300;
+  }
+  
+  /* Section styling */
+  .alt-section {
+    background-color: var(--section-bg);
   }
 }

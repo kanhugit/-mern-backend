@@ -147,6 +147,14 @@ export const stats = [
 // Project categories
 export const projectCategories = ["Web App", "Java", "MERN Stack", "Full Stack"];
 
+// Import project images
+import todoImage from "../assets/projects/project-todo.svg";
+import videoLibraryImage from "../assets/projects/project-video.svg";
+import portfolioImage from "../assets/projects/project-portfolio.svg";
+import ecommerceImage from "../assets/projects/project-ecommerce.svg";
+import bankingImage from "../assets/projects/project-banking.svg";
+import studentImage from "../assets/projects/project-student.svg";
+
 // Projects
 export const projects = [
   {
@@ -155,7 +163,7 @@ export const projects = [
     description: "A comprehensive To-Do List application with complete CRUD functionality for efficient task management.",
     technologies: ["HTML", "CSS", "JavaScript", "React.js", "Node.js", "Express", "MongoDB"],
     category: "MERN Stack",
-    image: "https://via.placeholder.com/600x400?text=TODO+List+App",
+    image: todoImage,
     demoLink: "https://github.com/kanhugit",
     codeLink: "https://github.com/kanhugit",
     featured: true,
@@ -166,7 +174,7 @@ export const projects = [
     description: "A feature-rich video library platform with separate admin and user modules for video management and viewing.",
     technologies: ["React.js", "Node.js", "Express", "MongoDB", "Redux"],
     category: "MERN Stack",
-    image: "https://via.placeholder.com/600x400?text=Video+Library",
+    image: videoLibraryImage,
     demoLink: "https://github.com/kanhugit",
     codeLink: "https://github.com/kanhugit",
     featured: true,
@@ -177,7 +185,7 @@ export const projects = [
     description: "A responsive personal portfolio website showcasing skills, projects, and professional experience.",
     technologies: ["React.js", "Bootstrap", "CSS", "Node.js", "Express"],
     category: "Web App",
-    image: "https://via.placeholder.com/600x400?text=Portfolio+Website",
+    image: portfolioImage,
     demoLink: "https://github.com/kanhugit",
     codeLink: "https://github.com/kanhugit",
     featured: true,
@@ -188,7 +196,7 @@ export const projects = [
     description: "A full-stack e-commerce application with product catalog, user authentication, shopping cart, and order management.",
     technologies: ["Java", "Spring Boot", "Hibernate", "JSP", "MySQL"],
     category: "Java",
-    image: "https://via.placeholder.com/600x400?text=Ecommerce+App",
+    image: ecommerceImage,
     demoLink: "https://github.com/kanhugit",
     codeLink: "https://github.com/kanhugit",
     featured: false,
@@ -199,7 +207,7 @@ export const projects = [
     description: "A secure banking application for account management, fund transfers, and transaction history tracking.",
     technologies: ["Java", "JDBC", "Servlet", "JSP", "MySQL"],
     category: "Java",
-    image: "https://via.placeholder.com/600x400?text=Banking+System",
+    image: bankingImage,
     demoLink: "https://github.com/kanhugit",
     codeLink: "https://github.com/kanhugit",
     featured: false,
@@ -210,7 +218,7 @@ export const projects = [
     description: "A comprehensive system for managing student records, course enrollments, and academic performance.",
     technologies: ["Java", "Spring MVC", "Hibernate", "JSP", "MySQL"],
     category: "Full Stack",
-    image: "https://via.placeholder.com/600x400?text=Student+Management",
+    image: studentImage,
     demoLink: "https://github.com/kanhugit",
     codeLink: "https://github.com/kanhugit",
     featured: false,

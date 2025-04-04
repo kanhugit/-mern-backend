@@ -1,0 +1,43 @@
+<svg width="600" height="400" viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bankingGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#8b5cf6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#7c3aed;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="600" height="400" fill="url(#bankingGradient)" />
+  
+  <!-- Bank Building -->
+  <rect x="180" y="120" width="240" height="160" fill="white" stroke="#7c3aed" stroke-width="2" />
+  
+  <!-- Pillars -->
+  <rect x="200" y="120" width="20" height="120" fill="#f1f5f9" stroke="#7c3aed" stroke-width="1" />
+  <rect x="250" y="120" width="20" height="120" fill="#f1f5f9" stroke="#7c3aed" stroke-width="1" />
+  <rect x="300" y="120" width="20" height="120" fill="#f1f5f9" stroke="#7c3aed" stroke-width="1" />
+  <rect x="350" y="120" width="20" height="120" fill="#f1f5f9" stroke="#7c3aed" stroke-width="1" />
+  
+  <!-- Roof -->
+  <polygon points="160,120 420,120 300,70" fill="#7c3aed" />
+  
+  <!-- Steps -->
+  <rect x="220" y="240" width="160" height="10" fill="#e9d5ff" />
+  <rect x="210" y="250" width="180" height="10" fill="#e9d5ff" />
+  <rect x="200" y="260" width="200" height="10" fill="#e9d5ff" />
+  <rect x="190" y="270" width="220" height="10" fill="#e9d5ff" />
+  
+  <!-- Credit Card -->
+  <rect x="440" y="150" width="80" height="50" rx="5" fill="#7c3aed" stroke="white" stroke-width="1" />
+  <rect x="450" y="170" width="60" height="5" fill="white" />
+  <rect x="450" y="180" width="40" height="5" fill="white" />
+  <rect x="450" y="160" width="20" height="5" fill="gold" />
+  
+  <!-- Money -->
+  <rect x="80" y="150" width="70" height="40" rx="2" fill="#84cc16" stroke="#4d7c0f" stroke-width="1" />
+  <circle cx="100" cy="170" r="12" fill="#f1f5f9" stroke="#4d7c0f" stroke-width="1" />
+  <text x="130" y="175" fill="#4d7c0f" font-family="Arial, sans-serif" font-size="16" font-weight="bold">$</text>
+  
+  <!-- Title -->
+  <text x="300" y="320" fill="white" font-family="Arial, sans-serif" font-size="24" font-weight="bold" text-anchor="middle">BANKING MANAGEMENT SYSTEM</text>
+</svg>

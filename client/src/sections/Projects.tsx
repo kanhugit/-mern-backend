@@ -20,7 +20,7 @@ const Projects: React.FC = () => {
     : projects.filter(project => project.category === activeCategory);
 
   return (
-    <section id="projects" className="py-20 bg-primary/5">
+    <section id="projects" className="py-20 alt-section">
       <div className="container mx-auto px-4 lg:px-6">
         {/* Section Header */}
         <motion.div
@@ -61,8 +61,8 @@ const Projects: React.FC = () => {
             onClick={() => setActiveCategory('All')}
             className={cn(
               activeCategory === 'All' 
-                ? 'bg-primary hover:bg-primary/90' 
-                : 'hover:bg-primary/10'
+                ? 'gradient-button border-none' 
+                : 'border-primary text-primary hover:text-primary/90 hover:bg-primary/5'
             )}
           >
             All
@@ -75,8 +75,8 @@ const Projects: React.FC = () => {
               onClick={() => setActiveCategory(category)}
               className={cn(
                 activeCategory === category 
-                  ? 'bg-primary hover:bg-primary/90' 
-                  : 'hover:bg-primary/10'
+                  ? 'gradient-button border-none' 
+                  : 'border-primary text-primary hover:text-primary/90 hover:bg-primary/5'
               )}
             >
               {category}
@@ -98,13 +98,13 @@ const Projects: React.FC = () => {
             >
               <Card className={cn(
                 "h-full overflow-hidden border-2 hover:border-primary transition-all",
-                isDark ? "bg-background/50" : "bg-background"
+                isDark ? "bg-background/50" : "card-gradient"
               )}>
                 <div className="relative h-48 overflow-hidden">
                   <img 
                     src={project.image} 
                     alt={project.title} 
-                    className="w-full h-full object-cover object-center transition-transform hover:scale-105"
+                    className="w-full h-full object-contain object-center transition-transform hover:scale-105"
                   />
                   <div className="absolute top-3 right-3">
                     <Badge className="bg-primary/80 hover:bg-primary">
@@ -139,7 +139,7 @@ const Projects: React.FC = () => {
                   <Button 
                     variant="default" 
                     size="sm"
-                    className="flex-1 bg-primary hover:bg-primary/90"
+                    className="flex-1 gradient-button"
                     asChild
                   >
                     <a href={project.demoLink} target="_blank" rel="noopener noreferrer">
@@ -150,7 +150,7 @@ const Projects: React.FC = () => {
                   <Button 
                     variant="outline" 
                     size="sm"
-                    className="flex-1"
+                    className="flex-1 border-primary text-primary hover:text-primary/90 hover:bg-primary/5"
                     asChild
                   >
                     <a href={project.codeLink} target="_blank" rel="noopener noreferrer">
@@ -175,7 +175,7 @@ const Projects: React.FC = () => {
             <Button 
               variant="outline" 
               onClick={() => setActiveCategory('All')}
-              className="group"
+              className="group border-primary text-primary hover:text-primary/90 hover:bg-primary/5"
             >
               View All Projects 
               <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
