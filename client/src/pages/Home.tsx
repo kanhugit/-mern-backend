@@ -9,8 +9,11 @@ import Skills from "@/sections/Skills";
 import Projects from "@/sections/Projects";
 import Contact from "@/sections/Contact";
 import Footer from "@/sections/Footer";
+import { useTheme } from "@/lib/ThemeContext";
 
 const Home: React.FC = () => {
+  const { theme } = useTheme();
+
   useEffect(() => {
     const handleScroll = () => {
       // Update active nav link on scroll
@@ -40,7 +43,7 @@ const Home: React.FC = () => {
   }, []);
 
   return (
-    <div className="bg-light text-dark font-sans">
+    <div className={`font-sans min-h-screen transition-colors duration-300 ${theme === 'dark' ? 'bg-background text-foreground' : 'bg-background text-foreground'}`}>
       <BackgroundAnimation />
       <Navbar />
       <Hero />
@@ -51,6 +54,7 @@ const Home: React.FC = () => {
       <Contact />
       <Footer />
       <BackToTop />
+      {/* AIAssistant will be added once all base components are ready */}
     </div>
   );
 };

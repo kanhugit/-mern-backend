@@ -1,136 +1,187 @@
-import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { projects, projectCategories } from "@/data/portfolioData";
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
+import { projects, projectCategories } from '@/data/portfolioData';
+import { fadeIn, staggerContainer, textVariant } from '@/lib/animations';
+import { useTheme } from '@/lib/ThemeContext';
+import { cn } from '@/lib/utils';
+import { Card, CardContent, CardFooter } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { ExternalLink, Code, ArrowRight } from 'lucide-react';
 
 const Projects: React.FC = () => {
-  const [activeCategory, setActiveCategory] = useState("All");
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
+  const [activeCategory, setActiveCategory] = useState<string>('All');
   
-  const filteredProjects = activeCategory === "All" 
+  // Filter projects based on selected category
+  const filteredProjects = activeCategory === 'All' 
     ? projects 
     : projects.filter(project => project.category === activeCategory);
 
   return (
-    <section id="projects" className="py-20 bg-gray-50">
-      <div className="container">
-        <div className="row">
-          <div className="col-lg-12 text-center mb-14">
-            <motion.span 
-              className="text-primary font-medium px-4 py-2 rounded-full border border-primary/20 inline-flex items-center mb-4"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
+    <section id="projects" className="py-20 bg-primary/5">
+      <div className="container mx-auto px-4 lg:px-6">
+        {/* Section Header */}
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.25 }}
+          className="text-center mb-16"
+        >
+          <motion.h2 
+            variants={textVariant(0.1)}
+            className="text-3xl md:text-4xl font-bold mb-4"
+          >
+            My <span className="text-primary">Projects</span>
+          </motion.h2>
+          <motion.div 
+            variants={textVariant(0.2)}
+            className="mx-auto w-24 h-1 bg-primary mb-6"
+          ></motion.div>
+          <motion.p 
+            variants={textVariant(0.3)}
+            className="max-w-2xl mx-auto text-muted-foreground"
+          >
+            Explore some of my recent work and personal projects
+          </motion.p>
+        </motion.div>
+
+        {/* Category Filter */}
+        <motion.div
+          variants={fadeIn('up')}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+          className="flex flex-wrap justify-center gap-3 mb-12"
+        >
+          <Button
+            variant={activeCategory === 'All' ? 'default' : 'outline'}
+            onClick={() => setActiveCategory('All')}
+            className={cn(
+              activeCategory === 'All' 
+                ? 'bg-primary hover:bg-primary/90' 
+                : 'hover:bg-primary/10'
+            )}
+          >
+            All
+          </Button>
+          
+          {projectCategories.map((category, index) => (
+            <Button
+              key={index}
+              variant={activeCategory === category ? 'default' : 'outline'}
+              onClick={() => setActiveCategory(category)}
+              className={cn(
+                activeCategory === category 
+                  ? 'bg-primary hover:bg-primary/90' 
+                  : 'hover:bg-primary/10'
+              )}
             >
-              <span className="w-2 h-2 bg-primary rounded-full mr-2"></span>
-              My Work
-            </motion.span>
-            <motion.h2 
-              className="font-poppins font-bold text-4xl"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.1 }}
+              {category}
+            </Button>
+          ))}
+        </motion.div>
+
+        {/* Projects Grid */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {filteredProjects.map((project, index) => (
+            <motion.div
+              key={project.id}
+              variants={fadeIn('up', index * 0.1)}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.1 }}
+              whileHover={{ y: -10 }}
+              transition={{ type: "spring", stiffness: 300 }}
             >
-              Recent Projects
-            </motion.h2>
-          </div>
-        </div>
-        
-        <div className="row mb-10">
-          <div className="col-lg-12">
-            <motion.div 
-              className="flex flex-wrap justify-center gap-4 mb-10"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-            >
-              {["All", ...projectCategories].map((category, index) => (
-                <motion.button
-                  key={index}
-                  className={`px-4 py-2 rounded-full ${
-                    activeCategory === category
-                      ? "bg-primary text-white"
-                      : "bg-gray-200 hover:bg-gray-300 transition-colors"
-                  }`}
-                  onClick={() => setActiveCategory(category)}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  {category}
-                </motion.button>
-              ))}
-            </motion.div>
-          </div>
-        </div>
-        
-        <div className="row">
-          <AnimatePresence mode="wait">
-            {filteredProjects.map((project, index) => (
-              <motion.div 
-                key={project.id} 
-                className="col-md-6 col-lg-4 mb-10"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                exit={{ opacity: 0, y: 30 }}
-                layout
-              >
-                <div className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all project-card h-full">
-                  <div className="overflow-hidden h-56">
-                    <img 
-                      src={project.image} 
-                      alt={project.title} 
-                      className="w-full h-full object-cover transition-transform"
-                    />
-                  </div>
-                  <div className="p-6">
-                    <div className="flex justify-between items-start mb-3">
-                      <span className="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm">
-                        {project.category}
-                      </span>
-                      <span className="text-gray-500 text-sm">{project.year}</span>
-                    </div>
-                    <h3 className="font-poppins font-semibold text-xl mb-3">{project.title}</h3>
-                    <p className="text-gray-600 mb-4">{project.description}</p>
-                    <div className="flex justify-between items-center">
-                      <div className="flex flex-wrap gap-2">
-                        {project.technologies.map((tech, techIndex) => (
-                          <span key={techIndex} className="px-2 py-1 bg-gray-100 rounded text-xs">
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
-                      <a 
-                        href={project.link} 
-                        className="text-primary hover:text-primary/80 transition-colors"
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                      >
-                        <i className="bi bi-arrow-right"></i>
-                      </a>
-                    </div>
+              <Card className={cn(
+                "h-full overflow-hidden border-2 hover:border-primary transition-all",
+                isDark ? "bg-background/50" : "bg-background"
+              )}>
+                <div className="relative h-48 overflow-hidden">
+                  <img 
+                    src={project.image} 
+                    alt={project.title} 
+                    className="w-full h-full object-cover object-center transition-transform hover:scale-105"
+                  />
+                  <div className="absolute top-3 right-3">
+                    <Badge className="bg-primary/80 hover:bg-primary">
+                      {project.category}
+                    </Badge>
                   </div>
                 </div>
-              </motion.div>
-            ))}
-          </AnimatePresence>
+                
+                <CardContent className="pt-6">
+                  <h3 className="text-xl font-bold mb-2">{project.title}</h3>
+                  <p className="text-muted-foreground mb-4 line-clamp-3">
+                    {project.description}
+                  </p>
+                  
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {project.technologies.slice(0, 4).map((tech, techIndex) => (
+                      <Badge 
+                        key={techIndex} 
+                        variant="outline"
+                        className="bg-primary/5"
+                      >
+                        {tech}
+                      </Badge>
+                    ))}
+                    {project.technologies.length > 4 && (
+                      <Badge variant="outline">+{project.technologies.length - 4}</Badge>
+                    )}
+                  </div>
+                </CardContent>
+                
+                <CardFooter className="border-t p-4 flex gap-3">
+                  <Button 
+                    variant="default" 
+                    size="sm"
+                    className="flex-1 bg-primary hover:bg-primary/90"
+                    asChild
+                  >
+                    <a href={project.demoLink} target="_blank" rel="noopener noreferrer">
+                      <ExternalLink className="h-4 w-4 mr-2" /> Demo
+                    </a>
+                  </Button>
+                  
+                  <Button 
+                    variant="outline" 
+                    size="sm"
+                    className="flex-1"
+                    asChild
+                  >
+                    <a href={project.codeLink} target="_blank" rel="noopener noreferrer">
+                      <Code className="h-4 w-4 mr-2" /> Code
+                    </a>
+                  </Button>
+                </CardFooter>
+              </Card>
+            </motion.div>
+          ))}
         </div>
         
-        <div className="row">
-          <div className="col-lg-12 text-center">
-            <motion.a
-              href="#"
-              className="px-6 py-3 rounded-lg border border-primary/20 text-primary font-medium hover:bg-primary/5 transition-all inline-flex items-center"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+        {/* View All Projects */}
+        {activeCategory !== 'All' && (
+          <motion.div 
+            variants={fadeIn('up', 0.5)}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.1 }}
+            className="text-center mt-10"
+          >
+            <Button 
+              variant="outline" 
+              onClick={() => setActiveCategory('All')}
+              className="group"
             >
-              View All Projects
-              <i className="bi bi-arrow-right ml-2"></i>
-            </motion.a>
-          </div>
-        </div>
+              View All Projects 
+              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </Button>
+          </motion.div>
+        )}
       </div>
     </section>
   );

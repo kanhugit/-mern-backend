@@ -1,101 +1,171 @@
-import React, { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import React, { useState, useEffect } from 'react';
+import { Button } from '@/components/ui/button';
+import { Moon, Sun, Menu, X } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { cn } from '@/lib/utils';
+import { useTheme } from '@/lib/ThemeContext';
+
+const navLinks = [
+  { name: 'Home', href: '#home' },
+  { name: 'About', href: '#about' },
+  { name: 'Education', href: '#education' },
+  { name: 'Skills', href: '#skills' },
+  { name: 'Projects', href: '#projects' },
+  { name: 'Contact', href: '#contact' },
+];
 
 const Navbar: React.FC = () => {
-  const [scrolled, setScrolled] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { theme, toggleTheme } = useTheme();
+  const isDarkMode = theme === 'dark';
 
+  // Handle scroll event to change navbar appearance
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+      setIsScrolled(window.scrollY > 50);
     };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener('scroll', handleScroll);
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault();
-    
-    const targetId = e.currentTarget.getAttribute('href');
-    if (!targetId) return;
-    
-    const targetElement = document.querySelector(targetId);
-    
-    if (targetElement) {
-      window.scrollTo({
-        top: (targetElement as HTMLElement).offsetTop - 80,
-        behavior: 'smooth'
-      });
-      
-      // Update active nav link
-      document.querySelectorAll('.nav-link').forEach(navLink => {
-        navLink.classList.remove('active');
-      });
-      e.currentTarget.classList.add('active');
-    }
+  // Close mobile menu when clicking a link
+  const handleLinkClick = () => {
+    setMobileMenuOpen(false);
   };
 
   return (
-    <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.5 }}
-      className={`navbar navbar-expand-lg fixed-top py-3 ${
-        scrolled ? "bg-white/90 backdrop-blur-md shadow-sm" : "bg-transparent"
-      }`}
+    <header 
+      className={cn(
+        'fixed top-0 left-0 w-full z-50 transition-all duration-300',
+        isScrolled 
+          ? `${isDarkMode ? 'bg-background/90 backdrop-blur-md shadow-md' : 'bg-background/90 backdrop-blur-md shadow-md'}` 
+          : 'bg-transparent'
+      )}
     >
-      <div className="container">
-        <a className="navbar-brand flex items-center" href="#home">
-          <span className="font-poppins text-2xl font-bold bg-gradient-to-r from-primary to-secondary text-transparent bg-clip-text">JD</span>
-          <span className="ml-2 font-poppins font-semibold text-dark">Portfolio</span>
-        </a>
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
-          <ul className="navbar-nav">
-            <li className="nav-item">
-              <a className="nav-link mx-2 active" href="#home" onClick={handleNavClick}>
-                Home
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-16">
+          {/* Logo */}
+          <a href="#home" className="flex items-center gap-2">
+            <motion.div 
+              whileHover={{ scale: 1.05 }}
+              className={cn(
+                'text-2xl font-bold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent',
+                'transition-all duration-300 ease-in-out'
+              )}
+            >
+              Portfolio
+            </motion.div>
+          </a>
+
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex gap-1">
+            {navLinks.map((link) => (
+              <a
+                key={link.name}
+                href={link.href}
+                className={cn(
+                  'py-2 px-3 rounded-md text-sm font-medium transition-colors duration-300 nav-link',
+                  'hover:bg-accent hover:text-accent-foreground'
+                )}
+              >
+                {link.name}
               </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link mx-2" href="#about" onClick={handleNavClick}>
-                About
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link mx-2" href="#education" onClick={handleNavClick}>
-                Education
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link mx-2" href="#skills" onClick={handleNavClick}>
-                Skills
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link mx-2" href="#projects" onClick={handleNavClick}>
-                Projects
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link mx-2" href="#contact" onClick={handleNavClick}>
-                Contact
-              </a>
-            </li>
-          </ul>
+            ))}
+            
+            {/* Theme toggle */}
+            <Button 
+              onClick={toggleTheme} 
+              variant="ghost" 
+              size="icon" 
+              className="ml-2"
+              aria-label={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
+            >
+              <AnimatePresence mode="wait">
+                {isDarkMode ? (
+                  <motion.div
+                    key="moon"
+                    initial={{ opacity: 0, rotate: -90 }}
+                    animate={{ opacity: 1, rotate: 0 }}
+                    exit={{ opacity: 0, rotate: 90 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <Sun className="h-5 w-5" />
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="sun"
+                    initial={{ opacity: 0, rotate: 90 }}
+                    animate={{ opacity: 1, rotate: 0 }}
+                    exit={{ opacity: 0, rotate: -90 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <Moon className="h-5 w-5" />
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </Button>
+          </nav>
+
+          {/* Mobile Menu Button */}
+          <div className="flex md:hidden items-center gap-2">
+            <Button 
+              onClick={toggleTheme} 
+              variant="ghost" 
+              size="icon" 
+              aria-label={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
+            >
+              {isDarkMode ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+            </Button>
+            
+            <Button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              variant="ghost" 
+              size="icon"
+              aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+            >
+              {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </Button>
+          </div>
         </div>
       </div>
-    </motion.nav>
+
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3 }}
+            className={cn(
+              'md:hidden overflow-hidden',
+              isDarkMode ? 'bg-background' : 'bg-background'
+            )}
+          >
+            <div className="container mx-auto px-4 py-4 flex flex-col space-y-1">
+              {navLinks.map((link) => (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  onClick={handleLinkClick}
+                  className={cn(
+                    'py-3 px-4 rounded-md text-base font-medium transition-colors duration-300 nav-link',
+                    'hover:bg-accent hover:text-accent-foreground'
+                  )}
+                >
+                  {link.name}
+                </a>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </header>
   );
 };
 

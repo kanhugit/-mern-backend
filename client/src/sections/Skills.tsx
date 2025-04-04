@@ -1,123 +1,108 @@
-import React from "react";
-import { motion } from "framer-motion";
-import { technicalSkills, otherSkills, stats } from "@/data/portfolioData";
+import React from 'react';
+import { motion } from 'framer-motion';
+import { technicalSkills, otherSkills } from '@/data/portfolioData';
+import { fadeIn, staggerContainer, textVariant } from '@/lib/animations';
+import { useTheme } from '@/lib/ThemeContext';
+import { cn } from '@/lib/utils';
+import { Badge } from '@/components/ui/badge';
 
 const Skills: React.FC = () => {
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
+
   return (
-    <section id="skills" className="py-20 bg-white">
-      <div className="container">
-        <div className="row">
-          <div className="col-lg-12 text-center mb-14">
-            <motion.span 
-              className="text-primary font-medium px-4 py-2 rounded-full border border-primary/20 inline-flex items-center mb-4"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-            >
-              <span className="w-2 h-2 bg-primary rounded-full mr-2"></span>
-              My Abilities
-            </motion.span>
-            <motion.h2 
-              className="font-poppins font-bold text-4xl"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-            >
-              Skills & Expertise
-            </motion.h2>
-          </div>
-        </div>
-        
-        <div className="row mb-10">
-          <div className="col-lg-6 mb-10 mb-lg-0">
-            <h3 className="font-poppins font-semibold text-2xl mb-8">Technical Skills</h3>
-            
-            {technicalSkills.map((skill, index) => (
-              <motion.div 
-                key={index} 
-                className="mb-6"
-                initial={{ opacity: 0, x: -50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
+    <section id="skills" className="py-20">
+      <div className="container mx-auto px-4 lg:px-6">
+        {/* Section Header */}
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.25 }}
+          className="text-center mb-16"
+        >
+          <motion.h2 
+            variants={textVariant(0.1)}
+            className="text-3xl md:text-4xl font-bold mb-4"
+          >
+            My <span className="text-primary">Skills</span>
+          </motion.h2>
+          <motion.div 
+            variants={textVariant(0.2)}
+            className="mx-auto w-24 h-1 bg-primary mb-6"
+          ></motion.div>
+          <motion.p 
+            variants={textVariant(0.3)}
+            className="max-w-2xl mx-auto text-muted-foreground"
+          >
+            A snapshot of my technical toolkit and professional capabilities
+          </motion.p>
+        </motion.div>
+
+        {/* Technical Skills */}
+        <motion.div
+          variants={fadeIn('up')}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+          className="mb-16"
+        >
+          <h3 className="text-2xl font-bold mb-8 text-center">Technical Skills</h3>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {technicalSkills.map((category, index) => (
+              <motion.div
+                key={index}
+                variants={fadeIn('up', index * 0.1)}
+                className={cn(
+                  "p-6 rounded-lg border-2",
+                  isDark ? 'bg-background/50 border-border' : 'bg-background/50 border-border'
+                )}
               >
-                <div className="flex justify-between mb-2">
-                  <span className="font-medium">{skill.name}</span>
-                  <span className="text-primary font-medium">{skill.level}%</span>
-                </div>
-                <div className="skill-bar bg-gray-200">
-                  <motion.div 
-                    className="skill-percentage bg-primary"
-                    initial={{ width: 0 }}
-                    whileInView={{ width: `${skill.level}%` }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 1, delay: 0.2 + index * 0.1 }}
-                  ></motion.div>
+                <h4 className="text-lg font-semibold mb-4 text-primary">{category.category}</h4>
+                <div className="flex flex-wrap gap-2">
+                  {category.skills.map((skill, skillIndex) => (
+                    <Badge 
+                      key={skillIndex} 
+                      variant="outline"
+                      className="bg-primary/10 hover:bg-primary/20 transition-colors"
+                    >
+                      {skill}
+                    </Badge>
+                  ))}
                 </div>
               </motion.div>
             ))}
           </div>
-          
-          <div className="col-lg-6">
-            <h3 className="font-poppins font-semibold text-2xl mb-8">Other Skills</h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-              {otherSkills.map((skill, index) => (
-                <motion.div 
-                  key={index}
-                  className="p-6 bg-gray-50 rounded-lg border border-gray-100 hover:shadow-md transition-shadow"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  whileHover={{ y: -5 }}
-                >
-                  <div className="mb-4 text-primary">
-                    <i className={`bi ${skill.icon} text-4xl`}></i>
-                  </div>
-                  <h4 className="font-poppins font-semibold text-xl mb-2">{skill.name}</h4>
-                  <p className="text-gray-600">{skill.description}</p>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </div>
+        </motion.div>
         
-        <div className="row">
-          <div className="col-lg-12">
-            <motion.div 
-              className="p-10 bg-gradient-to-r from-primary/5 to-secondary/5 rounded-2xl border border-gray-100"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7 }}
-            >
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-                {stats.map((stat, index) => (
-                  <motion.div 
-                    key={index}
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                  >
-                    <motion.div 
-                      className="font-poppins font-bold text-4xl text-primary mb-2"
-                      initial={{ opacity: 0, y: 10 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
-                    >
-                      {stat.value}
-                    </motion.div>
-                    <div className="text-gray-600">{stat.title}</div>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
+        {/* Other Skills */}
+        <motion.div
+          variants={fadeIn('up', 0.3)}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+        >
+          <h3 className="text-2xl font-bold mb-8 text-center">Other Skills</h3>
+          
+          <div className="flex flex-wrap justify-center gap-3 max-w-4xl mx-auto">
+            {otherSkills.map((skill, index) => (
+              <motion.div
+                key={index}
+                variants={fadeIn('up', 0.4 + index * 0.05)}
+                whileHover={{ scale: 1.05 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                <Badge 
+                  variant="outline"
+                  className="text-base py-2 px-4 bg-primary/5 hover:bg-primary/10 border-primary/20"
+                >
+                  {skill}
+                </Badge>
+              </motion.div>
+            ))}
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
