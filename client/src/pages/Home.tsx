@@ -7,6 +7,7 @@ import About from "@/sections/About";
 import Education from "@/sections/Education";
 import Skills from "@/sections/Skills";
 import Projects from "@/sections/Projects";
+import WorkEnvironment from "@/sections/WorkEnvironment";
 import Contact from "@/sections/Contact";
 import Footer from "@/sections/Footer";
 import { useTheme } from "@/lib/ThemeContext";
@@ -51,6 +52,7 @@ const Home: React.FC = () => {
       <Education />
       <Skills />
       <Projects />
+      <WorkEnvironment />
       <Contact />
       <Footer />
       <BackToTop />
