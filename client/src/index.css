@@ -136,4 +136,27 @@
   .animate-pulse-slow {
     animation: pulse-slow 4s ease-in-out infinite;
   }
+  
+  /* Personal details styling */
+  .detail-item {
+    @apply transition-all duration-300 hover:translate-y-[-2px];
+  }
+  
+  .detail-label {
+    @apply relative inline-block;
+  }
+  
+  .detail-label::after {
+    content: '';
+    @apply absolute bottom-[-2px] left-0 w-full h-[2px];
+    background: linear-gradient(to right, hsl(var(--primary)), rgba(139, 92, 246, 0.2));
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+  }
+  
+  .detail-item:hover .detail-label::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
 }

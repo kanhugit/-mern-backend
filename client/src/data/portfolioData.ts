@@ -1,6 +1,6 @@
 // Portfolio data
-import profileImage from "../assets/profile.png";
-import profileColorImage from "../assets/profile-color.jpg";
+import profileImage from "@assets/myphoto.png";
+import profileColorImage from "@assets/myphoto1.jpg";
 
 // Personal information
 export const personalInfo = {
