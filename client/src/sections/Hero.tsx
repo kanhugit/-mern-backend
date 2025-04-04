@@ -154,54 +154,7 @@ const Hero: React.FC = () => {
               />
             </div>
             
-            {/* Personal details below the photo */}
-            <motion.div 
-              variants={fadeIn('up', 0.3)} 
-              className="mt-6 space-y-3 px-4 md:px-6 py-4 bg-card/30 backdrop-blur-sm rounded-lg border border-primary/30 shadow-md hover:shadow-lg transition-all duration-300 max-w-sm w-full"
-              whileHover={{ y: -5, transition: { duration: 0.3 } }}
-            >
-              <h4 className="font-semibold text-lg text-center bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">Personal Details</h4>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2 text-sm">
-                <div className="space-y-3">
-                  <div className="flex flex-col detail-item">
-                    <span className="font-medium text-primary detail-label">Date of Birth</span> 
-                    <span className="text-muted-foreground">{personalInfo.personalDetails.dateOfBirth}</span>
-                  </div>
-                  
-                  <div className="flex flex-col detail-item">
-                    <span className="font-medium text-primary detail-label">Father's Name</span> 
-                    <span className="text-muted-foreground">{personalInfo.personalDetails.fatherName}</span>
-                  </div>
-                  
-                  <div className="flex flex-col detail-item">
-                    <span className="font-medium text-primary detail-label">Nationality</span> 
-                    <span className="text-muted-foreground">{personalInfo.personalDetails.nationality}</span>
-                  </div>
-                  
-                  <div className="flex flex-col detail-item">
-                    <span className="font-medium text-primary detail-label">Status</span> 
-                    <span className="text-muted-foreground">{personalInfo.personalDetails.maritalStatus}</span>
-                  </div>
-                </div>
-                
-                <div className="space-y-3">
-                  <div className="flex flex-col detail-item">
-                    <span className="font-medium text-primary detail-label">Languages</span> 
-                    <span className="text-muted-foreground">{personalInfo.personalDetails.languages.join(', ')}</span>
-                  </div>
-                  
-                  <div className="flex flex-col detail-item">
-                    <span className="font-medium text-primary detail-label">Religion</span> 
-                    <span className="text-muted-foreground">{personalInfo.personalDetails.religion}</span>
-                  </div>
-                  
-                  <div className="flex flex-col detail-item">
-                    <span className="font-medium text-primary detail-label">Address</span> 
-                    <span className="text-muted-foreground">{personalInfo.personalDetails.address}</span>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
+
           </motion.div>
         </motion.div>
         

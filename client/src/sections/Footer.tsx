@@ -1,6 +1,7 @@
 import React from 'react';
 import { Github, Linkedin, Heart } from 'lucide-react';
 import { personalInfo } from '@/data/portfolioData';
+import emailSignature from '../assets/email-signature.png';
 
 const Footer: React.FC = () => {
   const year = new Date().getFullYear();
@@ -8,6 +9,17 @@ const Footer: React.FC = () => {
   return (
     <footer className="py-12 bg-primary/5">
       <div className="container mx-auto px-4 lg:px-6">
+        {/* Email signature card */}
+        <div className="flex justify-center mb-10">
+          <div className="max-w-md w-full rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
+            <img 
+              src={emailSignature} 
+              alt="Kanhu Behera Email Signature" 
+              className="w-full h-auto" 
+            />
+          </div>
+        </div>
+        
         <div className="flex flex-col md:flex-row justify-between items-center gap-6">
           {/* Logo and copyright */}
           <div className="flex flex-col items-center md:items-start">
